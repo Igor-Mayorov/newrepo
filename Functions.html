@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script type="text/javascript" language="javascript">
+function multiply(a, b) {
+	return a * b;
+}
+
+function isDivideByFour(n){
+	return n % 4 == 0;
+}
+
+function isLeadYear(year) {
+	return (year % 100 === 0) ? (year % 400 === 0) : (year % 4 === 0);
+}
+
+function runLoop() {
+	for (let x = 1; x <= 10; x++) {
+		console.log(x);
+	}
+}
+
+function iAmTheBestArtist() {
+	var canvas = document.getElementById("myCanvas");
+	canvas.style = "border:1px solid #000000;"
+	var ctx = canvas.getContext("2d");
+	ctx.fillStyle = "blue";
+	ctx.fillRect(0, 0, 200, 200);
+	ctx.fillRect(0, 201, 200, 200);
+	ctx.fillRect(201, 0, 200, 200);
+	ctx.fillRect(201, 201, 200, 200);
+	ctx.fillStyle = "black";
+	ctx.fillRect(0, 200, 400, 1);
+	ctx.fillRect(200, 0, 1, 400);
+	
+}
+
+function caller(name) {
+	switch (name) {
+		case 'multiply':
+			var a = prompt("Please enter a");
+			var b = prompt("Please enter b");
+			alert(multiply(a, b));
+			break;
+		case 'isDivideByFour':
+			var a = prompt("Please enter number");
+			alert(isDivideByFour(a));
+			break;
+		case 'checkDate':
+			var a = prompt("Please enter date (follow format yyyy)");
+			alert(isLeadYear(a));
+			break;
+		case 'loop':
+			runLoop();
+			alert("Done");
+			break;
+		case 'draw':
+			iAmTheBestArtist();
+			break;
+	}
+}
+</script>
+</head>
+<body style="display: inline-grid;">
+<button style="margin: 10px;" onclick="caller('multiply')">Task1</button>
+<button style="margin: 10px;" onclick="caller('isDivideByFour')">Task2</button>
+<button style="margin: 10px;" onclick="caller('checkDate')">Task3</button>
+<button style="margin: 10px;" onclick="caller('loop')">Task4</button>
+<button style="margin: 10px;" onclick="caller('draw')">Task5</button>
+<canvas id="myCanvas" width="401" height="401"></canvas>
+</body>
+</html>
