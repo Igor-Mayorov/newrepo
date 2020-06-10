@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script type="text/javascript" language="javascript">
+window.onload = function() {
+	var name = prompt("Please enter teacher name");
+	var surname = prompt("Please enter teacher surname");
+	var department = prompt("Please enter teacher department");
+	var faculty = prompt("Please enter teacher faculty");
+	var age = prompt("Please enter teacher age");
+	
+	var teacher = new Teacher(name, surname, faculty, department, age);
+	
+    panel = document.createElement('DIV');
+    panel.innerHTML = teacher.getString();
+    document.body.appendChild(panel);
+}
+
+class Teacher {
+	constructor(name, surname, faculty, department, age) {
+		this.name = name;
+		this.surname = surname;
+		this.faculty = faculty;
+		this.department = department;
+		this.age = age;
+	}
+	
+	getString() {
+		return `Teacher: ${this.surname} ${this.name} <br/> Work place: ${this.department}/${this.faculty} <br/> Age: ${this.age}`
+	}
+}
+</script>
+</head>
+<body>
+</body>
+</html>
