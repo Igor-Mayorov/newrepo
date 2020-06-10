@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script type="text/javascript" language="javascript">
+var request = new XMLHttpRequest(); 
+var request2 = new XMLHttpRequest(); 
+function sendRequest(){ 
+	request.open("GET", "https://api.privatbank.ua/p24api/pubinfo?exchange&json");
+	request.onreadystatechange = readResponse;        
+	request.send();
+}
+
+function readResponse() {
+	if (request.readyState == 4) {    
+		var status = request.status;
+		if (status == 200) { 
+			obj = JSON.parse(request.responseText);
+			let res = document.createElement("div");
+			res.innerHTML = obj[0].ccy + " / " + obj[0].base_ccy+" buy:" + obj[0].buy + " sale:" + obj[0].sale;
+			document.getElementById('out1').appendChild(res);
+		}
+	}
+}
+
+function sendRequest2(){ 
+	request2.open("GET", "https://developerhub.alfabank.by:8273/partner/1.0.0/public/rates");
+	request2.onreadystatechange = readResponse2;        
+	request2.send();
+}
+
+function readResponse2() {
+	if (request2.readyState == 4) {    
+		var status = request2.status;
+		if (status == 200) { 
+			obj = JSON.parse(request2.responseText);
+			console.log(obj);
+			let res = document.createElement("div");
+			if (obj.result.name === 'Unauthorized') {
+				res.innerHTML = "Error: " + obj.result.name + "<br/> Status code: " + obj.result.status + "<br/> Message:" + obj.result.message + "<br/>P.S.: Copy token form https://gorest.co.in/";
+			} else {
+				res.innerHTML = "Id: " + obj.result[0].id + " <br/>Album id: " + obj.result[0].album_id + "<br/>Title: " + obj.result[0].title + "<br/> Url:" + obj.result[0].url;
+			}
+			document.getElementById('out2').appendChild(res);
+		}
+	}
+}
+</script>
+</head>
+<body>
+<div id="out1"></div>
+<button id = "btn" onclick="sendRequest()">getJSON(Task1)</button>
+<div id="out2"></div>
+<button id = "btn2" onclick="sendRequest2()">getJSON(Task2)</button>
+</body>
+</html>
